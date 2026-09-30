@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>VIP for a Day: The Causative</title>
+<link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Nunito:wght@400;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#1a0510;--wine:#4a0d27;--red:#b3122f;--gold:#f0bd4a;--gold2:#fbe39a;--ivory:#fff6e2;--ok:#3fbf7f;--bad:#ff6b6b;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);color-scheme:dark}
+html{scroll-padding-top:70px;scroll-behavior:smooth}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ivory);font:17px/1.6 Nunito,system-ui,sans-serif}
+h1,h2,h3{font-family:'Abril Fatface',Georgia,serif;font-weight:400;color:var(--gold);margin:.2em 0}
+h1{font-size:clamp(2.6rem,9vw,5.5rem);line-height:1;background:linear-gradient(90deg,var(--gold2),var(--gold),#c98a1a,var(--gold2));-webkit-background-clip:text;background-clip:text;color:transparent;background-size:200%;animation:shine 5s linear infinite}
+@keyframes shine{to{background-position:200%}}
+@media(prefers-reduced-motion:reduce){h1{animation:none}html{scroll-behavior:auto}}
+h2{font-size:clamp(1.7rem,5vw,2.6rem)}h3{font-size:1.3rem;color:var(--gold2)}
+.wrap{max-width:860px;margin:auto;padding:0 18px}
+.hero{text-align:center;padding:60px 18px 40px;background:radial-gradient(ellipse at top,var(--wine),var(--bg) 70%);border-bottom:6px solid var(--red)}
+.hero p{max-width:600px;margin:12px auto;font-size:1.15rem}
+.bar{position:sticky;top:0;z-index:9;background:#0d0208ee;border-bottom:2px solid var(--gold);padding:8px 12px;padding-top:calc(8px + env(safe-area-inset-top,0px));display:flex;gap:6px;align-items:center;overflow-x:auto}
+.bar a{flex:none;color:var(--ivory);text-decoration:none;font-weight:800;font-size:.85rem;padding:5px 10px;border-radius:99px;border:1px solid #f0bd4a55}
+.bar a.done{background:var(--gold);color:#2a0715}
+.bar .sc{margin-left:auto;flex:none;color:var(--gold);font-weight:800}
+section.floor{padding:46px 0;border-bottom:1px dashed #f0bd4a44}
+.badge{display:inline-block;background:var(--red);color:var(--ivory);font-weight:800;border-radius:99px;padding:3px 14px;font-size:.9rem;border:1px solid var(--gold)}
+.card{background:linear-gradient(160deg,#3a0a20,#250615);border:1px solid #f0bd4a66;border-radius:18px;padding:18px;margin:16px 0}
+.es{color:var(--gold2);font-size:.95rem;border-left:3px solid var(--red);padding-left:10px;margin:10px 0}
+.ex{background:#0006;border-radius:10px;padding:8px 12px;margin:6px 0}
+b.k{color:var(--gold)}
+.flips{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
+.flip{min-height:150px;border-radius:16px;border:2px solid var(--gold);background:linear-gradient(145deg,var(--red),var(--wine));color:var(--ivory);font:inherit;padding:14px;cursor:pointer;text-align:center}
+.flip .front{font-family:'Abril Fatface',serif;font-size:1.8rem;color:var(--gold2)}
+.flip.on{background:linear-gradient(145deg,#f7d477,var(--gold));color:#2a0715}
+.opts{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0}
+.opts button,.btn{font:inherit;font-weight:800;background:transparent;color:var(--ivory);border:2px solid var(--gold);border-radius:12px;padding:8px 14px;cursor:pointer}
+.opts button:hover,.btn:hover{background:#f0bd4a33}
+.opts button:focus-visible,.btn:focus-visible,.flip:focus-visible,textarea:focus-visible,select:focus-visible{outline:3px solid var(--gold2);outline-offset:2px}
+.opts button.ok{background:var(--ok);color:#052014;border-color:var(--ok)}
+.opts button.no{background:var(--bad);color:#2b0505;border-color:var(--bad)}
+.fb{min-height:1.4em;font-size:.95rem;color:var(--gold2)}
+.q p{margin:.2em 0;font-weight:700}
+table{width:100%;border-collapse:collapse;font-size:.95rem}
+.tw{overflow-x:auto}
+td,th{border:1px solid #f0bd4a55;padding:8px;text-align:left;vertical-align:top}
+th{background:var(--wine);color:var(--gold)}
+input[type=range]{width:100%;accent-color:var(--gold)}
+.meter{height:14px;border-radius:99px;background:#0008;overflow:hidden;border:1px solid var(--gold)}
+.meter i{display:block;height:100%;background:linear-gradient(90deg,var(--ok),var(--gold),var(--red));transition:width .3s}
+textarea,select{width:100%;font:inherit;background:#0009;color:var(--ivory);border:2px solid var(--gold);border-radius:12px;padding:10px}
+.chk label{display:block;padding:8px 10px;margin:6px 0;border:1px solid #f0bd4a55;border-radius:10px;cursor:pointer}
+.chk input{accent-color:var(--gold);margin-right:8px}
+.rank{font-family:'Abril Fatface',serif;font-size:2rem;color:var(--gold);text-align:center}
+.vic{float:right;width:clamp(110px,26vw,190px);height:auto;margin:0 0 8px 14px;filter:drop-shadow(0 6px 10px #000a)}
+.vic.cheer{animation:pop .8s ease 2}
+@keyframes pop{30%{transform:scale(1.15) rotate(-4deg)}60%{transform:scale(.95) rotate(3deg)}}
+@media(prefers-reduced-motion:reduce){.vic.cheer{animation:none}}
+.tri{clear:both;display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px;margin:18px 0}
+.tc{border-radius:16px;padding:14px 16px;border:1px solid #f0bd4a66;background:#2a0716;border-top:6px solid var(--gold)}
+.tc.ex{border-top-color:var(--red)}.tc.act{border-top-color:var(--ok);background:#0f2a1f}
+.tc h4{margin:0 0 6px;font-size:.85rem;letter-spacing:.06em;color:var(--gold2);font-family:Nunito,sans-serif;font-weight:800}
+.tc.act h4{color:#8fe8b8}
+.tc ol{margin:6px 0;padding-left:20px}.tc li{margin:3px 0}
+.tc .t{font:inherit;font-weight:800;background:var(--ok);color:#052014;border:0;border-radius:99px;padding:6px 14px;cursor:pointer;margin-top:6px}
+.tc .es{font-size:.88rem;margin:8px 0 0}
+.think{clear:both;margin:18px 0;padding:16px 18px;border-radius:18px;border:2px solid var(--gold);background:linear-gradient(150deg,#5a1230,#2a0716);box-shadow:0 0 22px #f0bd4a33}
+.think h4{margin:0 0 6px;font:800 .85rem Nunito,sans-serif;letter-spacing:.06em;color:var(--gold2)}
+.think .q{font-size:1.1rem;font-weight:800;margin:4px 0}
+.think .ins{margin-top:10px;padding:10px 12px;border-left:4px solid var(--gold);background:#0007;border-radius:8px}
+.think small{color:#f0bd4aaa}
+.nu{clear:both;margin:16px 0;padding:14px 16px;border-radius:16px;border:1px solid #b58cff88;border-left:6px solid #b58cff;background:#1f0d3a}
+.nu h4{margin:0 0 6px;font:800 .85rem Nunito,sans-serif;letter-spacing:.06em;color:#d9c4ff}
+.nu ul{margin:6px 0;padding-left:20px}.nu li{margin:4px 0}
+.why{clear:both;margin:16px 0;padding:14px 16px;border-radius:16px;border:1px solid #3fd0c988;border-left:6px solid #3fd0c9;background:#08282a}
+.why h4{margin:0 0 4px;font:800 .85rem Nunito,sans-serif;letter-spacing:.06em;color:#8ff0ea}
+.why .scn{font-weight:800;margin:14px 0 4px}
+.why details{margin:5px 0;border-radius:10px;background:#0007;padding:7px 12px}
+.why summary{cursor:pointer;font-weight:700}
+.why summary:focus-visible{outline:3px solid var(--gold2);outline-offset:2px}
+.why details[open].ok{border-left:4px solid var(--ok)}.why details[open].no{border-left:4px solid var(--bad)}.why details[open].mid{border-left:4px solid var(--gold)}
+.why .rs{margin:6px 0 2px;font-size:.95rem}
+.why .all{font:inherit;font-weight:800;background:transparent;color:#8ff0ea;border:2px solid #3fd0c9;border-radius:99px;padding:4px 12px;cursor:pointer;margin:6px 0}
+.bub{background:#0009;border-left:4px solid var(--gold);border-radius:12px;padding:8px 12px;margin:6px 0 10px;font-weight:600}
+.chip{font:inherit;font-weight:800;border:2px solid var(--gold);background:#3a0a20;color:var(--ivory);border-radius:10px;padding:5px 12px;margin:4px;cursor:pointer;display:inline-flex;flex-direction:column;align-items:center;line-height:1.2}
+.chip small{font-size:.65rem;color:var(--gold2);font-weight:700}
+.chip:hover{background:#f0bd4a33}.chip:focus-visible{outline:3px solid var(--gold2);outline-offset:2px}
+.ans{min-height:54px;border:2px dashed #f0bd4a88;border-radius:12px;padding:6px;margin:8px 0}
+.ans:empty::before{content:"Tap the words in order";color:#f0bd4a99;font-size:.9rem;padding:8px}
+.inp{width:100%;font:inherit;background:#0009;color:var(--ivory);border:2px solid var(--gold);border-radius:12px;padding:10px;margin:6px 0}
+.inp:focus-visible{outline:3px solid var(--gold2);outline-offset:2px}
+.final{text-align:center;padding:50px 18px;background:radial-gradient(ellipse at bottom,var(--wine),var(--bg) 70%)}
+</style></head><body>
+
+<header class="hero">
+<p class="badge">Language Arts · Grammar Studio</p>
+<h1>VIP for a Day</h1>
+<p>Celebrities don't wash their cars. They <b class="k">have them washed</b>. Today you'll climb six floors, from Guest to Boss, and learn the grammar of people who make things happen: <b class="k">the causative</b>.</p>
+<p class="es">En español: el causativo se usa cuando <i>alguien hace que otro haga algo</i> (o que algo ocurra).</p>
+<a class="btn" href="#l1">Enter the red carpet</a>
+</header>
+
+<nav class="bar" id="bar">
+<a href="#l1">1 Remember</a><a href="#l2">2 Understand</a><a href="#l3">3 Apply</a><a href="#l4">4 Analyze</a><a href="#l5">5 Evaluate</a><a href="#l6">6 Create</a><a href="#p2">Part 2 Conversations</a><a href="#p3">Part 3 Gym</a><a href="#twist">Plot twist</a>
+<span class="sc" id="score">0 pts</span>
+</nav>
+
+<main class="wrap">
+
+<section class="floor" id="l1" data-l="1">
+<img class="vic" data-n="1" alt="Vic, floor 1" hidden>
+<span class="badge">Floor 1 · Remember · Guest</span>
+<h2>The Guest List</h2>
+<p>Every VIP has a team. Every team member is a <b class="k">verb</b>. Tap each card to reveal the formula and an example.</p>
+<div class="flips" id="flips"></div>
+<div class="card">
+<h3>Golden rule</h3>
+<div class="ex"><b class="k">Person</b> after the verb → a <b class="k">verb</b> (base verb or <i>to</i> + verb)</div>
+<div class="ex"><b class="k">Thing</b> after the verb → <b class="k">past participle</b> (the thing receives the action)</div>
+<p class="es">Persona → verbo. Cosa → participio pasado.</p>
+</div>
+<h3>Quick check</h3><div id="q1"></div>
+</section>
+
+<section class="floor" id="l2" data-l="2">
+<img class="vic" data-n="2" alt="Vic, floor 2" hidden>
+<span class="badge">Floor 2 · Understand · Member</span>
+<h2>Who really does it?</h2>
+<div class="card">
+<div class="ex">I <b class="k">cut</b> my hair. → <i>I</i> did it (with scissors, in my bathroom).</div>
+<div class="ex">I <b class="k">had</b> my hair <b class="k">cut</b>. → <i>a stylist</i> did it. I was the VIP.</div>
+<p>The subject doesn't do the action: the subject <b class="k">causes</b> it. That's the whole idea. The rest is choosing <i>how much power</i> you use.</p>
+<p class="es">En español: "Me corté el pelo" es ambiguo. En inglés debes elegir: <i>cut</i> (yo) o <i>had cut</i> (otro).</p>
+</div>
+<h3>Power meter: how bossy are you?</h3>
+<div class="card">
+<input type="range" id="pw" min="0" max="5" value="2" aria-label="Pressure level">
+<div class="meter"><i id="pm"></i></div>
+<p id="pt" style="font-size:1.1rem"></p>
+</div>
+<div class="card tw"><table>
+<tr><th>Verb</th><th>Use it when…</th><th>Example</th></tr>
+<tr><td><b class="k">have</b></td><td>services or delegating with normal authority</td><td>I had the mechanic check the brakes.</td></tr>
+<tr><td><b class="k">get</b></td><td>convincing, or informal talk</td><td>I got my dad to lend me the car.</td></tr>
+<tr><td><b class="k">make</b></td><td>forcing, or causing a reaction</td><td>The movie made me cry.</td></tr>
+<tr><td><b class="k">let</b></td><td>giving permission</td><td>Mom let me go out.</td></tr>
+<tr><td><b class="k">help</b></td><td>assisting (<i>to</i> optional)</td><td>She helped me (to) finish.</td></tr>
+</table></div>
+<div class="card">
+<h3>Tenses: where does it live?</h3>
+<p>Only <b class="k">have / get / make / let</b> change tense. The participle or base verb never changes.</p>
+<div class="ex"><b class="k">Very common:</b> past simple (<i>I had my hair cut yesterday</i>), will / going to (<i>I'll have it sent</i>), present simple for habits (<i>I have my car washed every Saturday</i>), present continuous (<i>I'm having my house painted</i>), modals (<i>You should have your eyes checked</i>).</div>
+<div class="ex"><b class="k">Rare:</b> present perfect continuous, past perfect, future perfect. They are correct, but you'll almost never hear them.</div>
+<p class="es">Ojo: <i>have</i> y <i>get</i> causativos no tienen pasiva. <i>Make</i> sí: <i>be made to</i> + verbo.</p>
+</div>
+<h3>Quick check: who did the action?</h3><div id="q2"></div>
+</section>
+
+<section class="floor" id="l3" data-l="3">
+<img class="vic" data-n="3" alt="Vic, floor 3" hidden>
+<span class="badge">Floor 3 · Apply · Manager</span>
+<h2>Give the orders</h2>
+<p>You're the manager now. Pick the correct word to complete each VIP order.</p>
+<div id="q3"></div>
+</section>
+
+<section class="floor" id="l4" data-l="4">
+<img class="vic" data-n="4" alt="Vic, floor 4" hidden>
+<span class="badge">Floor 4 · Analyze · Executive</span>
+<h2>Error Hunters</h2>
+<p>Each sentence was "written by a VIP" and has a mistake. Find <i>why</i> it's wrong.</p>
+<div class="card">
+<h3>Patterns to compare</h3>
+<div class="ex">had the mechanic <b class="k">check</b> ✔ / had the mechanic <b class="k">checked</b> ✘</div>
+<div class="ex">got the mechanic <b class="k">to check</b> ✔ / got the mechanic check ✘</div>
+<div class="ex">I <b class="k">had</b> my car <b class="k">repaired</b> = someone repaired it. I <b class="k">had repaired</b> my car = past perfect, I did it.</div>
+<div class="ex">Questions: <i>Did you have your car repaired?</i> ✔ / <i>Have you your car repaired?</i> ✘</div>
+<div class="ex">Careful: <i>He had his wallet stolen</i> is bad luck, not a request. Context decides.</div>
+</div>
+<div id="q4"></div>
+</section>
+
+<section class="floor" id="l5" data-l="5">
+<img class="vic" data-n="5" alt="Vic, floor 5" hidden>
+<span class="badge">Floor 5 · Evaluate · Director</span>
+<h2>The Judge</h2>
+<p>Several sentences may be grammatical, but only one fits the situation best. Judge like a director.</p>
+<div id="q5"></div>
+</section>
+
+<section class="floor" id="l6" data-l="6">
+<img class="vic" data-n="6" alt="Vic, floor 6" hidden>
+<span class="badge">Floor 6 · Create · The Boss</span>
+<h2>Your VIP Day</h2>
+<p>Choose a VIP and write their day. Use <b class="k">at least five causatives</b>: one each of <i>have, get, make, let</i> and one service (<i>have/get + thing + participle</i>).</p>
+<select id="vip" aria-label="Choose VIP"><option>A famous singer on tour</option><option>A football superstar</option><option>The president of a country</option><option>An influencer with a million followers</option><option>A billionaire on a private island</option></select>
+<p></p>
+<textarea id="story" rows="8" placeholder="At 7 a.m., the singer had her assistant bring coffee. Then she got her stylist to..."></textarea>
+<p><button class="btn" id="chk">Check my VIP day</button></p>
+<div class="card" id="rep" hidden></div>
+<div class="card chk"><h3>Self-check (be honest)</h3>
+<label><input type="checkbox"> After <b>have/make/let + person</b> I used a base verb, without <i>to</i>.</label>
+<label><input type="checkbox"> After <b>get + person</b> I used <i>to</i>.</label>
+<label><input type="checkbox"> With a <b>thing</b> I used a past participle.</label>
+<label><input type="checkbox"> My VIP shows different levels of power (<i>let</i> ≠ <i>make</i>).</label>
+<label><input type="checkbox"> I used <b>make</b> once for real pressure and once for a reaction (<i>The song made me cry</i>).</label>
+<label><input type="checkbox"> I used <b>have</b> for a service or real authority, and <b>get</b> to convince an equal.</label>
+</div>
+</section>
+
+<section class="floor" id="p2">
+<span class="badge">Part 2 · Real conversations</span>
+<h2>The Conversation Room</h2>
+<p>Now the VIPs talk <b class="k">to you</b>. Knowing the structure is not enough: you must understand what the other person means, respond well, and notice when someone goes too far. Same six Bloom steps, in real dialogue.</p>
+<p class="es">Aquí no solo dices el causativo: lo escuchas, lo interpretas, respondes y juzgas si fue excesivo.</p>
+<h3>1 · Remember: spot the verb</h3><div id="c1"></div>
+<h3>2 · Understand: what are they telling you?</h3><div id="c2"></div>
+<h3>3 · Apply: how do you answer?</h3><div id="c3"></div>
+<h3>4 · Analyze: same words, different pressure</h3><div id="c4"></div>
+<h3>5 · Evaluate: appropriate, excessive or too soft?</h3><div id="c5"></div>
+<h3>6 · Create: write the conversation</h3>
+<div class="card">
+<select id="c6r" aria-label="Choose the dialogue"><option>Star and assistant</option><option>Coach and player</option><option>Parent and teenager</option><option>Manager and employee</option></select>
+<p>Write 6 lines. Include: one request that is <b class="k">appropriate</b>, one that goes <b class="k">too far</b>, and a <b class="k">polite response</b> from the other person (<i>Would you mind…? / I’d rather… / Could you let me…?</i>).</p>
+<textarea id="c6t" rows="7" placeholder="Star: I had my assistant book the hotel.&#10;Assistant: Of course. ..."></textarea>
+<p><button class="btn" id="c6b">Check my conversation</button></p><div class="card" id="c6f" hidden></div>
+</div>
+</section>
+
+<section class="floor" id="p3">
+<span class="badge">Part 3 · Practice until it is automatic</span>
+<h2>The Construction Gym</h2>
+<p>Five stages. First you <b class="k">see</b> the model in every tense. Then you <b class="k">build</b> sentences with labeled words, then with words alone. At the end you <b class="k">write</b> them yourself for the occasion.</p>
+<h3>Stage 1 · Model: every tense, every occasion</h3>
+<div class="card"><select id="tsel" aria-label="Choose a tense"></select><div class="tw" id="tout"></div></div>
+<p class="es">Los tiempos compuestos (perfect continuous, future perfect) existen, pero casi no se usan con el causativo.</p>
+<h3>Stage 2 · Labeled words: build with support</h3><p>Each word shows its role. Tap them in order.</p><div id="b2"></div>
+<h3>Stage 3 · Words alone: build without help</h3><p>No labels now. Use the tense and occasion to decide the order.</p><div id="b3"></div>
+<h3>Stage 4 · Write it for the occasion</h3><p>Now nobody gives you the words. Read the situation and write the sentence.</p><div id="w4"></div>
+<h3>Stage 5 · The Occasion Machine</h3><p>You only get a situation. <b class="k">You</b> choose the verb and the structure.</p>
+<div class="card" id="om"><p class="q" id="omq" style="font-weight:800"></p><input class="inp" id="omi" aria-label="Your sentence" placeholder="Write your sentence..."><button class="btn" id="omc" type="button">Check</button> <button class="btn" id="omn" type="button">New occasion</button><div class="fb" id="omf"></div><p class="es" id="oms"></p></div>
+</section>
+
+<section class="floor" id="twist">
+<span class="badge">Bonus · Plot twist</span>
+<h2>You are a VIP too</h2>
+<p>You think this grammar is only for celebrities? Tick everything that happened to you <b class="k">this week</b>.</p>
+<div class="card chk" id="tw"></div>
+<div class="rank" id="rk"></div>
+<p class="es" id="rt" style="text-align:center"></p>
+</section>
+</main>
+
+<footer class="final"><h2>You just spoke like a boss.</h2><p>Every time you convince, order, allow or arrange, you use the causative. Now you have the words for it.</p></footer>
+
+<script>
+const $=id=>document.getElementById(id);
+let pts=0,done={};
+function add(l){pts++;$('score').textContent=pts+' pts';}
+function quiz(id,items,l){
+  const box=$(id);let answered=0;
+  items.forEach(it=>{
+    const d=document.createElement('div');d.className='card q';
+    d.innerHTML='<p>'+it.q+'</p><div class="opts"></div><div class="fb"></div>';
+    const o=d.querySelector('.opts'),fb=d.querySelector('.fb');
+    it.o.forEach((t,i)=>{
+      const b=document.createElement('button');b.textContent=t;
+      b.onclick=()=>{
+        if(d.dataset.d)return;
+        if(i===it.a){d.dataset.d=1;b.classList.add('ok');fb.textContent='✔ '+it.e;add();answered++;
+          if(answered===items.length){done[l]=1;{const nb=document.querySelector('.bar a[href="#l'+l+'"]');if(nb)nb.classList.add('done');cheer(l);}}}
+        else{b.classList.add('no');b.disabled=true;fb.textContent='Not yet. Try another option.';}
+      };
+      o.appendChild(b);
+    });
+    box.appendChild(d);
+  });
+}
+// Vic images
+const VIC={};
+document.querySelectorAll('img.vic').forEach(im=>{
+  const n=im.dataset.n,list=VIC[n]?[VIC[n]]:['images/vic-'+n+'.gif','images/vic-'+n+'.png','images/vic-'+n+'.webp'];
+  let i=0;im.onload=()=>{im.hidden=false};
+  im.onerror=()=>{i++;if(i<list.length)im.src=list[i];else im.remove();};
+  im.src=list[0];
+});
+function cheer(l){const im=document.querySelector('img.vic[data-n="'+l+'"]');if(im){im.classList.remove('cheer');void im.offsetWidth;im.classList.add('cheer');}}
+// Floor 1
+[["HAVE","have + person + base verb<br>have + thing + participle","I had the mechanic check the brakes. / I had my brakes checked."],
+ ["GET","get + person + to + verb<br>get + thing + participle","I got my brother to help me. / I got my hair cut."],
+ ["MAKE","make + person + base verb","My mom made me clean my room."],
+ ["LET","let + person + base verb","She let me borrow her book."],
+ ["HELP","help + person + (to) verb","He helped me (to) finish."],
+ ["FORCE, ALLOW, REQUIRE","verb + person + to + verb","They forced me to sign it."]
+].forEach(c=>{
+  const b=document.createElement('button');b.className='flip';b.setAttribute('aria-pressed','false');
+  b.innerHTML='<div class="front">'+c[0]+'</div><small>tap to flip</small>';
+  b.onclick=()=>{const on=b.classList.toggle('on');b.setAttribute('aria-pressed',on);
+    b.innerHTML=on?'<b>'+c[1]+'</b><br><br><i>'+c[2]+'</i>':'<div class="front">'+c[0]+'</div><small>tap to flip</small>';};
+  $('flips').appendChild(b);
+});
+quiz('q1',[
+ {q:'Which verb needs <b>to</b> after the person?',o:['make','let','get','have'],a:2,e:'get + person + to + verb.'},
+ {q:'After a <b>thing</b> (my car), the verb form is…',o:['base verb','past participle','to + verb','-ing only'],a:1,e:'The thing receives the action: my car repaired.'},
+ {q:'Which one means "give permission"?',o:['let','make','get','force'],a:0,e:'let = permission. Mom let me go out.'}
+],1);
+// Floor 2
+quiz('q2',[
+ {q:'"I had my hair cut." Who cut it?',o:['I did','Someone else'],a:1,e:'Causative: someone else did it.'},
+ {q:'"I cut my own hair." Who cut it?',o:['I did','Someone else'],a:0,e:'Simple past: I did it.'},
+ {q:'"She got her car washed." Who washed it?',o:['She did','Someone else'],a:1,e:'get + thing + participle = a service.'},
+ {q:'"We had the plumber fix the sink." Who fixed it?',o:['We did','The plumber'],a:1,e:'have + person + base verb.'},
+ {q:'"He painted his room himself." Who painted?',o:['He did','Someone else'],a:0,e:'No causative here.'}
+],2);
+// Power meter
+const P=[['let','Full freedom. "My parents let me stay up late."'],['help','You support. "She helped me understand."'],['have','Normal authority or a service. "I had my assistant send it."'],['get','Some effort to convince. "I got my dad to lend me the car."'],['make','Pressure, no choice. "The coach made us run."'],['force','Very strong pressure. "They forced me to sign."']];
+function pw(){const v=+$('pw').value;$('pm').style.width=(v/5*100)+'%';$('pt').innerHTML='<b class="k">'+P[v][0]+'</b>: '+P[v][1];}
+$('pw').oninput=pw;pw();
+// Floor 3
+quiz('q3',[
+ {q:'I\'m going to ___ my teeth cleaned tomorrow.',o:['have','make','let'],a:0,e:'have + thing + participle.'},
+ {q:'The coach ___ us run ten laps. We didn\'t want to!',o:['made','let','helped'],a:0,e:'make = obligation.'},
+ {q:'She ___ her brother to lend her the car. It took an hour!',o:['made','got','let'],a:1,e:'get + person + to = convince.'},
+ {q:'My parents ___ me stay up late on Saturdays.',o:['let','forced','got'],a:0,e:'let + person + base verb.'},
+ {q:'I had the mechanic ___ the brakes.',o:['check','checked','to check'],a:0,e:'have + person + base verb.'},
+ {q:'We got the house ___ before the party.',o:['paint','painted','to paint'],a:1,e:'thing → participle.'},
+ {q:'The boss forced me ___ the contract.',o:['sign','signed','to sign'],a:2,e:'force + person + to + verb.'}
+],3);
+// Floor 4
+const R=['make / let / have never take "to"','With a thing we need a past participle','get + person needs "to"','Someone else did it: use the causative'];
+quiz('q4',[
+ {q:'✘ <i>She made me <u>to</u> cry.</i> Why is it wrong?',o:R,a:0,e:'Correct: She made me cry.'},
+ {q:'✘ <i>I had my car <u>repair</u>.</i> Why is it wrong?',o:R,a:1,e:'Correct: I had my car repaired.'},
+ {q:'✘ <i>I got my brother <u>help</u> me.</i> Why is it wrong?',o:R,a:2,e:'Correct: I got my brother to help me.'},
+ {q:'✘ <i>I <u>cut</u> my hair at the salon.</i> Why does it sound odd?',o:R,a:3,e:'Correct: I had (got) my hair cut at the salon.'}
+],4);
+// Floor 5
+quiz('q5',[
+ {q:'You convinced your grandpa (after a long talk) to lend you his guitar. Best sentence?',o:['I made my grandpa lend me his guitar.','I got my grandpa to lend me his guitar.','I let my grandpa lend me his guitar.'],a:1,e:'get + to = convincing with effort. "Made" would sound like you forced him.'},
+ {q:'You went to a barber. Which is the most natural and polite?',o:['I made the barber cut my hair.','I cut my hair at the barber.','I had my hair cut at the barber.'],a:2,e:'A service: have + thing + participle. "Made" sounds rude.'},
+ {q:'A sad song brought tears to your eyes. Best sentence?',o:['The song made me cry.','The song let me cry.','The song had cried me.'],a:0,e:'make also causes emotions and reactions.'},
+ {q:'Your teacher gave you permission to leave early. Best sentence?',o:['My teacher made me leave early.','My teacher got me leave early.','My teacher let me leave early.'],a:2,e:'let = permission.'}
+],5);
+// Floor 6 checker
+$('chk').onclick=()=>{
+  const t=$('story').value.trim(),r=$('rep');r.hidden=false;
+  if(!t){r.innerHTML='Write your VIP day first.';return;}
+  const c=k=>(t.match(k)||[]).length;
+  const n={have:c(/\b(had|have|has|having)\s+(my|his|her|their|our|the|a|an|him|her|them|us|me)\b/gi),get:c(/\b(get|got|gets|getting)\s+(my|his|her|their|our|the|a|an|him|them|us|me)\b/gi),make:c(/\b(made|make|makes)\s+\w+\s+\w+/gi),let:c(/\b(let|lets)\s+\w+\s+\w+/gi)};
+  const bad=[];
+  if(/\b(made|make|makes|let|lets)\s+\w+\s+to\s/i.test(t))bad.push('After make/let there is no "to".');
+  if(/\b(got|get|gets)\s+(him|her|them|us|me|my \w+|his \w+|her \w+)\s+(?!to\b)[a-z]+\s/i.test(t)&&/\b(got|get)\s+(him|her|them|my \w+)\s+(call|help|bring|send|book|do|make|clean|cook)\b/i.test(t))bad.push('get + person needs "to" (got him to call).');
+  const tot=n.have+n.get+n.make+n.let;
+  let h='<h3>Report</h3><p>have: '+n.have+' · get: '+n.get+' · make: '+n.make+' · let: '+n.let+'</p>';
+  h+=tot>=5?'<p>✔ You reached '+tot+' possible causatives.</p>':'<p>You need more: found '+tot+' of 5.</p>';
+  ['have','get','make','let'].forEach(k=>{if(!n[k])h+='<p>Missing: '+k+'.</p>';});
+  bad.forEach(b=>h+='<p>⚠ '+b+'</p>');
+  h+='<p class="es">Este revisor es aproximado. Tu profesor hará la revisión final.</p>';
+  r.innerHTML=h;
+  if(tot>=5&&!bad.length&&!done[6]){done[6]=1;for(let i=0;i<5;i++)add();document.querySelector('.bar a[href="#l6"]').classList.add('done');cheer(6);}
+};
+// Plot twist
+const T=[['You asked your sister to bring you water.','I had my sister bring me water.'],['You convinced mom to order pizza.','I got my mom to order pizza.'],['A friend forced you to share your snack.','My friend made me share my snack.'],['Your parents allowed you to go out.','My parents let me go out.'],['You paid someone to cut your hair.','I had my hair cut.'],['You asked a classmate to save you a seat.','I got a classmate to save me a seat.']];
+T.forEach((x,i)=>{const l=document.createElement('label');l.innerHTML='<input type="checkbox"> '+x[0]+'<br><b class="k">'+x[1]+'</b>';l.querySelector('input').onchange=tw;$('tw').appendChild(l);});
+function tw(){const n=document.querySelectorAll('#tw input:checked').length;
+  const rk=['Intern','Assistant','Manager','Director','Vice President','CEO','Superstar VIP'][n];
+  $('rk').textContent=n?'Rank: '+rk:'';
+  $('rt').textContent=n?'You were the boss '+n+' time'+(n>1?'s':'')+' this week. You already use the causative in your life, now you can say it in English.':'';}
+
+// Teaching cards
+const C={
+l1:{e:["Explain","The causative means the <b class=k>subject makes something happen through someone else</b>. Your team has six members: <b class=k>have, get, make, let, help</b> and the <b class=k>force / allow / require</b> family.","Cada verbo es un miembro del equipo con un nivel de poder distinto."],
+ x:["Example","✘ <i>Shakira washed her car.</i> She did it herself.<br>✔ <i>Shakira had her car washed.</i> The car-wash team did it, and she is the VIP."],
+ a:["Memory Relay",5,["Groups of 4. Study the flip cards for 2 minutes.","Teacher calls a verb (for example <i>get</i>).","Student 1 writes the formula on the board, student 2 adds an example, student 3 says it aloud.","1 point per correct step. Students rotate."]]},
+l2:{e:["Explain","Ask one question: <b class=k>who does the action?</b> If someone else does it, use a causative. Then choose the power: <b class=k>let < help < have < get < make < force</b>.","Primero decide quién hace la acción; luego, cuánta presión usas."],
+ x:["Example","Same event, three powers:<br><i>My dad <b class=k>let</b> me wash the car.</i> (I wanted to)<br><i>My dad <b class=k>had</b> me wash the car.</i> (a normal request)<br><i>My dad <b class=k>made</b> me wash the car.</i> (no choice)"],
+ a:["Power Charades",6,["Groups of 4: 1 VIP, 3 Staff. Roles rotate each round.","VIP draws a power card (let, have, get, make) and says an order with that verb.","Staff react: they cheer for <i>let</i>, complain dramatically for <i>make</i>.","The group scores 1 point when the reaction matches the verb."]]},
+l3:{e:["Explain","Use the <b class=k>person-or-thing test</b>:<br>Person → verb (<i>have/make/let</i> + base, <i>get</i> + to).<br>Thing → past participle.","Persona → verbo. Cosa → participio."],
+ x:["Example","<i>I had the mechanic <b class=k>check</b> the brakes.</i> (person)<br><i>I had my brakes <b class=k>checked</b>.</i> (thing)<br><i>I got my brother <b class=k>to help</b> me.</i> (person + to)"],
+ a:["Service Desk",8,["Prepare cards: barber, mechanic, dentist, chef, painter, tailor.","VIP draws a card and announces a need: <i>I need to get my teeth cleaned!</i>","Staff mime the service. If the VIP used the structure well, the group scores.","Extra: each student writes 3 orders using person + verb and 3 using thing + participle."]]},
+l4:{e:["Explain","Four common errors: <b class=k>1)</b> <i>to</i> after make/let. <b class=k>2)</b> base verb after a thing. <b class=k>3)</b> no <i>to</i> after get + person. <b class=k>4)</b> doing it yourself when someone else did it.","Analizar es encontrar la regla que se rompió, no solo corregir."],
+ x:["Example","✘ <i>She made me to cry.</i> → ✔ <i>She made me cry.</i><br>✘ <i>I had my car repair.</i> → ✔ <i>…repaired.</i><br>✘ <i>I got him call.</i> → ✔ <i>…to call.</i>"],
+ a:["Error Hunters Battle",8,["Teams get 6 wrong sentences. First hand up must explain <i>why</i> it is wrong.","Correct + correct reason = 2 points. Only the correction = 1 point.","Round 2: each team writes one wrong sentence and passes it to another team to fix.","Winner: the team with the trickiest error that was still fixed."]]},
+l5:{e:["Explain","Evaluating means choosing the <b class=k>best</b> sentence, not just a correct one. Use four criteria: <b class=k>who</b> acts, how much <b class=k>pressure</b>, how <b class=k>polite</b>, how <b class=k>formal</b>.","Varias oraciones pueden estar bien; solo una encaja mejor con la situación."],
+ x:["Example","<i>I made the barber cut my hair.</i> → correct but rude.<br><i>I had my hair cut.</i> → natural.<br><i>I got the barber to cut it shorter.</i> → I convinced him."],
+ a:["Judge's Court",8,["Teacher reads a scenario card.","Each group shows a green paddle (best sentence) or a red one (weak sentence) and defends it in one sentence.","The Judge (rotating student) gives a verdict using the four criteria.","1 point for the best-argued defense."]]},
+l6:{e:["Explain","Creating means combining everything. Your <b class=k>VIP recipe</b> has five ingredients: a service (<i>have/get + thing + participle</i>), <i>have</i> + person, <i>get</i> + person + to, <i>make</i>, <i>let</i>.","Cinco ingredientes = un día VIP completo."],
+ x:["Example","<i>At 7 a.m., the singer <b class=k>had</b> her assistant <b class=k>bring</b> coffee. Then she <b class=k>got</b> her hair <b class=k>styled</b>. Her manager <b class=k>made</b> her <b class=k>rehearse</b>, but the band <b class=k>let</b> her <b class=k>choose</b> the last song.</i>"],
+ a:["VIP Day Pitch",15,["Write your VIP's day with the five ingredients (10 min).","Use the checker and the self-check list to fix your text.","Read it aloud as a pitch (30 seconds).","Class votes two awards: <i>Most Powerful Boss</i> and <i>Most Polite Boss</i>."]]},
+twist:{e:["Explain","You already use the causative in daily life. Every time you <b class=k>arrange, convince, order or allow</b> something, you are a small VIP.","Ya lo haces en español; ahora tienes las palabras en inglés."],
+ x:["Example","<i>I got my mom to order pizza.</i><br><i>I had my little brother bring me my charger.</i><br><i>My parents let me go out.</i>"],
+ a:["Boss Interview",6,["Pairs. Ask each other: <i>What did you get someone to do this week?</i>","Answer with a causative: <i>I got my sister to…</i>","Change roles, then tell the class one surprising answer about your partner."]]}
+};
+Object.entries(C).forEach(([k,d])=>{
+  const sec=document.getElementById(k);if(!sec)return;
+  const a=d.a,box=document.createElement('div');box.className='tri';
+  box.innerHTML='<div class="tc"><h4>💡 '+d.e[0].toUpperCase()+'</h4><p>'+d.e[1]+'</p><p class="es">'+d.e[2]+'</p></div>'+
+   '<div class="tc ex"><h4>🎬 '+d.x[0].toUpperCase()+'</h4><p>'+d.x[1]+'</p></div>'+
+   '<div class="tc act"><h4>🎯 ACTIVITY · '+a[0].toUpperCase()+' · '+a[1]+' MIN</h4><ol>'+a[2].map(x=>'<li>'+x+'</li>').join('')+'</ol><button class="t" type="button">Start timer</button> <span class="tm" aria-live="off"></span></div>';
+  const btn=box.querySelector('.t'),tm=box.querySelector('.tm');let iv;
+  btn.onclick=()=>{clearInterval(iv);let r=a[1]*60;const f=()=>{tm.textContent=Math.floor(r/60)+':'+String(r%60).padStart(2,'0');};f();
+    iv=setInterval(()=>{r--;f();if(r<=0){clearInterval(iv);tm.textContent="Time's up!";}},1000);};
+  const h=sec.querySelector('h2');h.after(box);
+  const p=h.nextElementSibling;
+});
+
+// Think like a VIP: intuition hooks
+const H={
+l1:{q:"Shakira's car is dirty. What does she do?",o:[["Shakira washed her car.","Hmm... a superstar with a bucket and a sponge? Unlikely."],["Shakira had her car washed.","Exactly! The car-wash team did it, and she is the boss."]],b:1,i:"Same event, different actor. <b class=k>have + thing + past participle</b> = you arranged it and someone else did it.",e:"Tu intuición ya conocía la regla."},
+l2:{q:"A pop star wants her assistant to bring coffee. It's a normal morning request. Which verb feels right?",o:[["She made her assistant bring coffee.","Feels harsh, like the assistant had no choice."],["She had her assistant bring coffee.","Yes. A normal request from someone with authority."],["She let her assistant bring coffee.","Odd: it sounds like the assistant asked for permission."]],b:1,i:"The verb shows <b class=k>how much power</b> the boss uses: let (permission) &lt; have (normal request) &lt; make (pressure).",e:"El verbo revela cuánta presión usa el jefe."},
+l3:{q:"A star talks about the same repair in two ways. Which pair sounds like real English?",o:[["I had my car repaired. / I had the mechanic repair my car.","Yes! Thing → participle. Person → base verb."],["I had my car repair. / I had the mechanic repaired my car.","The verbs are in the wrong places."]],b:0,i:"A <b class=k>thing</b> receives the action (repaired). A <b class=k>person</b> does it (repair). Ask: who is the doer?",e:"Cosa recibe → participio. Persona hace → verbo base."},
+l4:{q:"A reporter writes: “The singer cut her hair at the salon.” Something feels off. What?",o:[["The verb cut is irregular.","No, cut is fine. Look at who acts."],["The sentence says she did it herself, but a stylist did.","Right! The grammar tells the wrong story."],["Singers don't go to salons.","Not the problem. The grammar is."]],b:1,i:"Analyzing means asking <b class=k>what story the grammar tells</b>. Fix: <i>The singer had her hair cut.</i>",e:"Un error de causativo es un error de “quién hizo qué”."},
+l5:{q:"A star describes her barber two ways. Which sentence makes her sound like a diva?",o:[["I made the barber cut my hair.","Yes: made = pressure. Correct grammar, wrong attitude."],["I had the barber cut my hair.","Neutral and polite. A normal service."]],b:0,i:"Both are grammatical. <b class=k>The verb you choose shows your relationship</b> with the other person.",e:"Evaluar es decidir cuál conviene, no solo cuál es correcta."},
+l6:{q:"Your VIP wakes up. Which job would they NEVER do alone? Pick one.",o:[["Drive to the studio","She had her driver take her to the studio."],["Choose an outfit","She got her stylist to choose the outfit (after a long argument)."],["Carry the bags","He made his bodyguard carry the bags. Ouch, a diva."],["Cook breakfast","She let her chef cook whatever he wanted."]],b:null,i:"Every job a VIP doesn't do alone is a <b class=k>causative waiting to be written</b>. Which power will you choose?",e:"Cada tarea delegada es una oración causativa."},
+twist:{q:"Your charger is in another room. What do you do?",o:[["Walk and get it myself.","Fair. But maybe a little brother is nearby..."],["I had my little brother bring it.","Boss move! You just used the causative."]],b:1,i:"You don't need to be famous. Anyone who <b class=k>arranges, convinces, orders or allows</b> something is a VIP.",e:"Tú también eres un VIP."}
+};
+Object.entries(H).forEach(([k,d])=>{
+  const sec=document.getElementById(k);if(!sec)return;
+  const bx=document.createElement('div');bx.className='think';
+  bx.innerHTML='<h4>💭 THINK LIKE A VIP FIRST</h4><p class="q">'+d.q+'</p><div class="opts"></div><div class="fb"></div><div class="ins" hidden></div><small>Tip: vote by show of hands before tapping.</small>';
+  const o=bx.querySelector('.opts'),fb=bx.querySelector('.fb'),ins=bx.querySelector('.ins');
+  d.o.forEach((x,i)=>{const b=document.createElement('button');b.type='button';b.textContent=x[0];
+    b.onclick=()=>{fb.textContent=x[1];ins.hidden=false;ins.innerHTML=d.i+'<p class="es">'+d.e+'</p>';if(d.b!==null&&i===d.b)b.classList.add('ok');};
+    o.appendChild(b);});
+  sec.querySelector('h2').after(bx);
+});
+
+// Nuances
+const N={
+l2:["The scale hides three different ideas","<ul><li><b class=k>Permission</b>: <i>let</i>. The other person already wanted it.</li><li><b class=k>Authority or service</b>: <i>have</i>. You ask and it gets done.</li><li><b class=k>Persuasion</b>: <i>get</i>. You convince, with effort.</li><li><b class=k>Pressure</b>: <i>make, force</i>. There is no choice.</li></ul>So <i>let → force</i> is a memory aid, not a ruler. Also, <i>make</i> can simply link a cause and a reaction: <i>The movie made me cry</i> (nobody is bossing anyone).","La escala mezcla permiso, autoridad, persuasión y presión."],
+l3:["Have needs authority or a service","Between equals (siblings, friends), <i>have + person</i> sounds odd.<br>Odd: <i>I had my sister bring me water.</i> (you sound like her boss)<br>Natural: <i>I got my sister to bring me water.</i><br>Works best with <b class=k>services</b> (barber, mechanic, dentist) and <b class=k>real authority</b> (manager, teacher).","Entre iguales, usa get + to o simplemente pide."],
+l4:["Not every make is a command","Before you flag an error or a “bossy” sentence, check the <b class=k>cause</b>: sometimes it is an emotion, and sometimes it is not even a person. Test yourself:<div id=qn4></div>","Make no siempre significa obligar."],
+l5:["Where the scale breaks","Four nuances to judge with: <b class=k>1)</b> the scale mixes permission, persuasion and pressure. <b class=k>2)</b> <i>have</i> needs authority or a service. <b class=k>3)</b> <i>make</i> can be cause and effect. <b class=k>4)</b> the subject can be a thing (<i>The rain made the game stop</i>).<div id=qn5></div>","Un buen juez sabe cuándo la regla no alcanza."],
+l6:["Before you write: three power tips","<ul><li>Use <b class=k>make</b> twice: once for pressure (<i>The coach made us run</i>) and once for a reaction (<i>The song made her cry</i>).</li><li>Use <b class=k>have</b> for services and authority, and <b class=k>get</b> when you convince an equal.</li><li>Try one cause that is not a person: <i>The storm made the concert stop.</i></li></ul>","Estos matices hacen que tu VIP suene natural."]
+};
+Object.entries(N).forEach(([k,d])=>{
+  const sec=document.getElementById(k),t=sec&&sec.querySelector('.tri');if(!t)return;
+  const b=document.createElement('div');b.className='nu';
+  b.innerHTML='<h4>⚠️ NUANCE · '+d[0].toUpperCase()+'</h4><p>'+d[1]+'</p><p class="es">'+d[2]+'</p>';
+  t.after(b);
+});
+quiz('qn4',[
+ {q:'“The movie made me cry.” Is someone pressuring you?',o:['Yes, the director','No: it is cause and effect'],a:1,e:'Make also links a cause to a reaction or emotion.'},
+ {q:'“The rain made the game stop.” Who is the boss?',o:['The players','Nobody: the cause is not a person'],a:1,e:'The subject can be a thing or an event. Formal version: The rain caused the game to stop.'},
+ {q:'“The coach made us run ten laps.” Is someone pressuring you?',o:['Yes, real pressure','No pressure'],a:0,e:'Here make = obligation.'}
+],42);
+quiz('qn5',[
+ {q:'Between two friends, which is more natural?',o:['I had my friend lend me his notes.','I got my friend to lend me his notes.'],a:1,e:'Have needs authority or a service. Between equals, get + to (persuasion).'},
+ {q:'Which sentence uses make with NO pressure?',o:['The coach made us run.','The joke made everyone laugh.','My mom made me clean.'],a:1,e:'A joke causes a reaction; nobody is forced.'},
+ {q:'Which verb on the scale is about persuasion, not authority?',o:['have','get','let'],a:1,e:'Get = convince with some effort.'}
+],52);
+
+// Why this verb? Why not the other?
+const W={
+l1:[["You went to the barber and your hair is now short.",[["+","I had my hair cut.","have + thing + participle: someone else cut it."],["+","I got my hair cut.","Same idea, more informal."],["-","I made my hair cut.","make needs a person + base verb (made the barber cut). A thing can't be forced."],["-","I let my hair cut.","let also needs a person, and a haircut is not a permission."]]],
+ ["Your mom said: clean your room, no discussion.",[["+","My mom made me clean my room.","make = no choice, and a base verb comes after me."],["-","My mom got me clean my room.","get needs to (got me to clean) and means convincing."],["-","My mom let me clean my room.","let = permission, the opposite of an order."]]]],
+l2:[["You want to drive your dad's car.",[["+","My dad let me drive his car.","let = he gave permission, and you wanted it."],["-","My dad made me drive his car.","make = you had no choice. It only fits if you did not want to."],["-","My dad had me drive his car.","have = he is the boss and requests it, like a work task. Odd for a teen."],["~","I got my dad to let me drive.","Correct, but it adds a step: you convinced him first."]]],
+ ["The coach says everyone runs ten laps. Nobody wants to.",[["+","The coach made us run ten laps.","make = obligation."],["-","The coach let us run ten laps.","let = we asked for it."],["-","The coach got us to run ten laps.","get = he convinced us with words. Here he ordered."]]]],
+l3:[["Your phone screen is broken and a technician fixes it.",[["+","I had my phone fixed.","Service: someone else acts, participle after the thing."],["+","I got my phone fixed.","Same meaning, informal."],["-","I made the technician fix my phone.","Correct form, but you sound rude: services are requested, not forced."],["-","I fixed my phone.","This says you did it yourself."]]],
+ ["Your brother did not want to help, but after a long talk he did.",[["+","I got my brother to help me.","get + to = convincing with effort."],["-","I made my brother help me.","make = force. You talked, you did not force him."],["~","I had my brother help me.","Odd between equals: have needs authority."]]]],
+l4:[["Find the type of mistake: form or meaning?",[["-","She made me to cry.","Form error: make takes a base verb, no to."],["-","I had my car repair.","Form error: a thing needs the participle (repaired)."],["-","I made the mechanic fix my car.","Meaning error: the form is right, but it sounds like you forced a service. Use had."],["-","I cut my hair at the salon.","Meaning error: it tells the wrong story, because you did not cut it."],["+","I had my car repaired.","Right form and right story."]]]],
+l5:[["A student stays after class. The teacher decided, not the student.",[["+","The teacher made us stay after class.","Faithful to the situation: no choice."],["~","The teacher had us stay after class.","Acceptable, but softer: it hides the pressure."],["-","The teacher let us stay after class.","let = we wanted it. That changes the facts."]]],
+ ["You wanted grandma's famous soup, asked nicely, and she agreed.",[["+","I got my grandma to cook her soup.","Persuasion, respectful."],["-","I made my grandma cook her soup.","Rude: it sounds like you forced an elder."],["-","I had my grandma cook her soup.","Sounds like she works for you."]]]],
+l6:[["Your VIP is a diva who demands everything.",[["+","The star made her assistant carry the bags.","make shows pressure and attitude."],["-","The star had her assistant carry the bags.","Too neutral: she would not sound like a diva."]]],
+ ["Your VIP is a generous captain.",[["+","The captain let the team choose the song.","let = generosity."],["-","The captain made the team choose the song.","Sounds harsh, as if choosing were a punishment."]]],
+ ["Your VIP is a smooth talker.",[["+","The agent got the director to say yes.","get = persuasion."],["-","The agent made the director say yes.","Makes the agent sound like a bully."]]],
+ ["Your VIP is a calm professional.",[["+","The manager had the team send the report.","have = normal authority."],["-","The manager let the team send the report.","Suggests the team needed permission."]]]]
+};
+const IC={"+":["ok","✔ Yes"],"~":["mid","≈ Possible, not the best"],"-":["no","✘ Not this one"]};
+Object.entries(W).forEach(([k,cases])=>{
+  const sec=document.getElementById(k),t=sec&&(sec.querySelector('.nu')||sec.querySelector('.tri'));if(!t)return;
+  const b=document.createElement('div');b.className='why';
+  let h='<h4>🔍 WHY THIS VERB? WHY NOT THE OTHER?</h4><p>Read each sentence and decide first. Then open it to check your reasoning.</p><button type="button" class="all">Open all</button>';
+  cases.forEach(c=>{h+='<p class="scn">'+c[0]+'</p>';
+    c[1].forEach(r=>{const m=IC[r[0]];h+='<details class="'+m[0]+'"><summary>'+r[1]+'</summary><p class="rs"><b>'+m[1]+'.</b> '+r[2]+'</p></details>';});});
+  b.innerHTML=h;
+  const btn=b.querySelector('.all');let open=false;
+  btn.onclick=()=>{open=!open;b.querySelectorAll('details').forEach(d=>d.open=open);btn.textContent=open?'Close all':'Open all';};
+  t.after(b);
+});
+
+// ===== PART 2 =====
+const bub=(w,t)=>'<div class="bub"><b>'+w+':</b> “'+t+'”</div>';
+quiz('c1',[
+ {q:bub('Boss','I had my assistant book your flight.')+'Which causative verb was used?',o:['have','get','make','let'],a:0,e:'“Had … book”: have + person + base verb.'},
+ {q:bub('Mom','I let you stay at Ana’s last time.')+'Which causative verb was used?',o:['have','get','make','let'],a:3,e:'“Let you stay”: permission.'},
+ {q:bub('Sam','I got my dad to drive us to the mall.')+'Which causative verb was used?',o:['have','get','make','let'],a:1,e:'“Got … to drive”: persuasion.'},
+ {q:bub('Coach','The heat made us stop the game.')+'Which causative verb was used?',o:['have','get','make','let'],a:2,e:'“Made us stop”: cause and effect.'}
+],71);
+const M=['Permission','Persuasion','Pressure (no choice)','A service'];
+quiz('c2',[
+ {q:bub('Coach','I’ll make you run until you drop.')+'What is being said to you?',o:M,a:2,e:'make = pressure, and here it sounds like a threat.'},
+ {q:bub('Teacher','I’ll let you redo the test.')+'What is being said to you?',o:M,a:0,e:'let = you receive an opportunity.'},
+ {q:bub('Friend','I got Sam to lend us his speaker.')+'What is being said to you?',o:M,a:1,e:'get + to = it took some convincing.'},
+ {q:bub('Mom','I’m having the car washed today.')+'What is being said to you?',o:M,a:3,e:'have/get + thing + participle = someone else washes it.'}
+],72);
+quiz('c3',[
+ {q:bub('Friend','Can you get your brother to drive us?')+'Best reply?',o:['“I’ll ask him. Maybe I can get him to say yes.”','“I’ll make him drive us. He has no choice!”','“I’ll let him drive us.”'],a:0,e:'A favor asks for persuasion: get. Make is too harsh, and let changes who is in charge.'},
+ {q:bub('Boss','Please have the report sent by five.')+'Best reply?',o:['“Sure. I’ll have Ana send it by five.”','“Sure. I’ll make the report send by five.”','“Sure. I had Ana to send it.”'],a:0,e:'have + person + base verb. A report cannot send itself, and have does not take to.'},
+ {q:bub('Mom','I’ll let you go to the party if you get your homework done.')+'Best reply?',o:['“Deal! I’ll get it done tonight.”','“Deal! I’ll make it doing tonight.”','“Deal! I’ll get to do it tonight.”'],a:0,e:'get + thing + participle: get it done.'}
+],73);
+quiz('c4',[
+ {q:'(A) My boss <b>had</b> me stay late. (B) My boss <b>made</b> me stay late. Which suggests more pressure?',o:['A','B','Same'],a:1,e:'made = no choice. Had = a normal request from a boss.'},
+ {q:'(A) She <b>got</b> him to apologize. (B) She <b>made</b> him apologize. What changes?',o:['A: she convinced him. B: she forced him.','A: she forced him. B: she convinced him.','Nothing'],a:0,e:'get = persuasion with effort. make = force.'},
+ {q:bub('Ben','My parents let me quit the team.')+'How did the parents act?',o:['They allowed it','They forced him','They convinced him'],a:0,e:'let = permission.'}
+],74);
+const E=['Appropriate','Excessive','Too soft'];
+quiz('c5',[
+ {q:bub('Teacher','I’ll make you clean the whole school for being one minute late.')+'Judge it.',o:E,a:1,e:'Make is real pressure and the punishment is disproportionate.'},
+ {q:bub('Clinic assistant','I’ll have the doctor see you now.')+'Judge it.',o:E,a:0,e:'A polite arrangement: have + person + base verb.'},
+ {q:bub('Friend','I made my little sister give me her birthday money.')+'Judge it.',o:E,a:1,e:'Forcing someone weaker is excessive, and it can be unfair.'},
+ {q:bub('Manager','I let the team choose the schedule because they know it best.')+'Judge it.',o:E,a:0,e:'let shows trust and gives permission with a reason.'},
+ {q:bub('Coach, before the final','I’ll let you decide if you want to practice.')+'Judge it.',o:E,a:2,e:'The team is unprepared. The situation needs firmer language (have / make).'}
+],75);
+$('c6b').onclick=()=>{
+  const t=$('c6t').value.trim(),r=$('c6f');r.hidden=false;
+  if(!t){r.textContent='Write your conversation first.';return;}
+  const c=k=>(t.match(k)||[]).length;
+  const n=c(/\b(had|have|has|having|get|got|gets|getting|made|make|makes|let|lets)\s+(my|his|her|their|our|the|a|an|him|them|us|me|you|\w+)\b/gi);
+  const pol=/\b(would you mind|could you|i’d rather|i'd rather|i’d prefer|i'd prefer|i understand|please)\b/i.test(t);
+  const bad=/\b(made|make|makes|let|lets)\s+\w+\s+to\s/i.test(t);
+  let h='<h3>Report</h3><p>Causative structures found: <b>'+n+'</b></p>';
+  h+=n>=3?'<p>✔ Enough structures.</p>':'<p>Add more: aim for at least 3.</p>';
+  h+=pol?'<p>✔ I found a polite response.</p>':'<p>Add a polite response (Would you mind…? / I’d rather…).</p>';
+  if(bad)h+='<p>⚠ After make/let there is no “to”.</p>';
+  h+='<p class="es">Revisor aproximado: tu profesor confirma si una línea era excesiva o adecuada.</p>';
+  r.innerHTML=h;
+  if(n>=3&&pol&&!bad&&!done.c6){done.c6=1;for(let i=0;i<3;i++)add();}
+};
+// ===== PART 3 =====
+const B=t=>t.replace(/\*(.+?)\*/g,'<b class="k">$1</b>');
+const TN=[
+["Present simple","have/has + thing + pp","I *have* my car washed every Saturday.","She *gets* her hair done every month.","The teacher *makes* us read aloud.","My parents *let* me use my phone."],
+["Present continuous","am/is/are having + thing + pp","I’m *having* my house painted this week.","He’s *getting* his car fixed.","The coach is *making* us run.","She’s *letting* me borrow her bike."],
+["Past simple","had/got + thing + pp","She *had* her hair cut yesterday.","I *got* my phone fixed.","The coach *made* us run.","Mom *let* me go out."],
+["Past continuous","was/were having + thing + pp","I was *having* my nails done when you called.","He was *getting* his tooth checked.","They were *making* us wait.","She was *letting* the kids play."],
+["Present perfect","have/has had + thing + pp","I’ve *had* my eyes checked recently.","I’ve *gotten* my passport renewed.","This class has *made* me love reading.","They’ve *let* us use the lab all week."],
+["Future (will)","will have + thing + pp","I’ll *have* the report sent tomorrow.","We’ll *get* the car washed.","The boss will *make* us stay.","She’ll *let* you go."],
+["Be going to","am/is/are going to have + thing + pp","We’re going to *have* the kitchen remodeled.","I’m going to *get* my hair cut.","He’s going to *make* us repeat it.","They’re going to *let* us leave early."],
+["With modals","should/must/need to + have/get + thing + pp","You should *have* your eyes checked.","You need to *get* your homework done.","They can’t *make* you sign.","I can’t *let* you go alone."]];
+const VR=[["have","Service, or a task you delegate with authority","have + thing + pp / have + person + base verb"],["get","Convince, or informal service","get + thing + pp / get + person + to + verb"],["make","Force, or cause a reaction","make + person + base verb"],["let","Permission","let + person + base verb"]];
+TN.forEach((t,i)=>{const o=document.createElement('option');o.value=i;o.textContent=t[0];$('tsel').appendChild(o);});
+function tense(){const t=TN[+$('tsel').value];
+  let h='<p>Pattern for this tense: <b class="k">'+t[1]+'</b></p><table><tr><th>Verb</th><th>Occasion</th><th>Structure</th><th>Example</th></tr>';
+  VR.forEach((v,i)=>{h+='<tr><td><b class="k">'+v[0]+'</b></td><td>'+v[1]+'</td><td>'+v[2]+'</td><td>'+B(t[2+i])+'</td></tr>';});
+  $('tout').innerHTML=h+'</table>';}
+$('tsel').onchange=tense;tense();
+// Sentence builder
+function builder(id,items,labeled){
+  items.forEach(it=>{
+    const d=document.createElement('div');d.className='card';
+    const ok=it.p.map(x=>x[0]).join(' ');
+    let sh;do{sh=it.p.map((_,i)=>i).sort(()=>Math.random()-.5);}while(sh.join()===sh.slice().sort((a,b)=>a-b).join());
+    let pick=[],fin=false;
+    d.innerHTML='<p><b>'+it.o+'</b></p><div class="ans"></div><div class="pool"></div><button class="btn ck" type="button">Check</button> <button class="btn rs" type="button">Reset</button><div class="fb"></div>';
+    const an=d.querySelector('.ans'),pl=d.querySelector('.pool'),fb=d.querySelector('.fb');
+    const chip=i=>{const b=document.createElement('button');b.type='button';b.className='chip';b.innerHTML=(labeled?'<small>'+it.p[i][1]+'</small>':'')+it.p[i][0];return b;};
+    function draw(){an.innerHTML='';pl.innerHTML='';
+      pick.forEach((i,k)=>{const b=chip(i);b.onclick=()=>{pick.splice(k,1);draw();};an.appendChild(b);});
+      sh.filter(i=>!pick.includes(i)).forEach(i=>{const b=chip(i);b.onclick=()=>{pick.push(i);draw();};pl.appendChild(b);});}
+    d.querySelector('.ck').onclick=()=>{
+      const t=pick.map(i=>it.p[i][0]).join(' ');
+      if(pick.length<it.p.length){fb.textContent='Use all the words.';return;}
+      if(t===ok){fb.textContent='✔ '+ok+'.';if(!fin){fin=true;add();}}
+      else fb.textContent='Not yet. Hint: '+it.h;};
+    d.querySelector('.rs').onclick=()=>{pick=[];fb.textContent='';draw();};
+    draw();$(id).appendChild(d);});
+}
+builder('b2',[
+ {o:'Service, past: you went to the mechanic.',h:'have + thing + participle.',p:[['I','subject'],['had','causative verb'],['my car','thing'],['repaired','past participle']]},
+ {o:'Delegating: the manager asked Ana to send the report.',h:'have + person + base verb.',p:[['The manager','subject'],['had','causative verb'],['Ana','person'],['send','base verb'],['the report','complement']]},
+ {o:'Persuasion: you convinced your dad.',h:'get + person + to + verb.',p:[['I','subject'],['got','causative verb'],['my dad','person'],['to lend','to + verb'],['me the car','complement']]},
+ {o:'Permission: your parents allow it.',h:'let + person + base verb.',p:[['My parents','subject'],['let','causative verb'],['me','person'],['stay up','base verb'],['late','complement']]},
+ {o:'Present continuous service: this week.',h:'is having + thing + participle.',p:[['She','subject'],['is having','causative verb'],['her nails','thing'],['done','past participle']]}
+],true);
+builder('b3',[
+ {o:'Past, force.',h:'made + person + base verb.',p:[['The coach'],['made'],['us'],['run'],['ten laps']]},
+ {o:'Future, service.',h:'will have + thing + participle.',p:[['We'],['will have'],['the kitchen'],['remodeled']]},
+ {o:'Modal, advice.',h:'should have + thing + participle.',p:[['You'],['should have'],['your eyes'],['checked']]},
+ {o:'Habit, service.',h:'have + thing + participle.',p:[['I'],['have'],['my car'],['washed'],['every Saturday']]},
+ {o:'Persuasion, past.',h:'got + person + to + verb.',p:[['She'],['got'],['her brother'],['to help'],['her']]},
+ {o:'Reaction, past.',h:'made + person + base verb.',p:[['The joke'],['made'],['everyone'],['laugh']]}
+],false);
+// Written production
+const PR=[
+ {o:'Yesterday you went to the barber. Tell a friend.',re:/\b(had|got)\s+(my|the)\s+hair\s+(cut|trimmed|styled|done)\b/i,m:'I had my hair cut yesterday.',h:'Service in the past: had/got + thing + participle.'},
+ {o:'Your dad allowed you to drive his car. Tell a friend.',re:/\bdad\s+let\s+me\s+drive\b/i,no:/\blet\s+me\s+to\b/i,m:'My dad let me drive his car.',h:'Permission: let + person + base verb (no to).'},
+ {o:'You convinced your sister to lend you her jacket. Tell a friend.',re:/\bgot\s+(my\s+)?sister\s+to\s+lend\b/i,m:'I got my sister to lend me her jacket.',h:'Convincing: got + person + to + verb.'},
+ {o:'The coach forced the whole team to run. Tell a friend.',re:/\bmade\s+(us|everyone|the team|them|the whole team)\s+run\b/i,m:'The coach made us run.',h:'Force: made + person + base verb.'},
+ {o:'Next week professionals will paint your house. Say it.',re:/\b(will have|'ll have|am going to have|'m going to have)\s+(my|the|our)\s+house\s+painted\b/i,m:'I’ll have my house painted next week.',h:'Future service: will / going to have + thing + participle.'},
+ {o:'Your friend’s eyes hurt. Advise him to see a doctor (use should).',re:/\bshould\s+(have|get)\s+your\s+eyes\s+(checked|examined|tested)\b/i,m:'You should have your eyes checked.',h:'Modal + have/get + thing + participle.'},
+ {o:'Right now a plumber is fixing your sink. Tell your mom.',re:/\b('m|am)\s+(having|getting)\s+(my|the)\s+sink\s+(fixed|repaired)\b/i,m:'I’m having my sink fixed.',h:'Present continuous: am having + thing + participle.'}
+];
+const nz=v=>v.replace(/[’‘]/g,"'").trim();
+PR.forEach(it=>{
+  const d=document.createElement('div');d.className='card';let fin=false;
+  d.innerHTML='<p><b>'+it.o+'</b></p><input class="inp" aria-label="Your sentence" placeholder="Write your sentence..."><button class="btn" type="button">Check</button><div class="fb"></div>';
+  const inp=d.querySelector('input'),fb=d.querySelector('.fb');
+  d.querySelector('button').onclick=()=>{const v=nz(inp.value);
+    if(it.re.test(v)&&!(it.no&&it.no.test(v))){fb.textContent='✔ Model: '+it.m;if(!fin){fin=true;add();}}
+    else fb.textContent='Not yet. Hint: '+it.h;};
+  $('w4').appendChild(d);
+});
+// Occasion Machine
+const OM={
+ service:{re:/\b(had|got|have|get|having|getting)\s+(my|our|his|her|their|the|a)\s+([a-z]+\s+){1,2}?[a-z]*(ed|en|t|ne|ut)\b/i,h:'It is a service: have/get + thing + past participle.',o:['You went to the dentist. Tell a friend.','A professional washed your car. Tell a friend.','A tailor altered your dress. Say it.']},
+ persuade:{re:/\b(got|get|gets|getting)\s+[a-z]+(\s+[a-z]+)?\s+to\s+[a-z]+/i,h:'You convinced someone: get + person + to + verb.',o:['You convinced your mom to buy pizza.','You convinced your friend to join the team.']},
+ force:{re:/\b(made|make|makes)\s+[a-z]+(\s+[a-z]+)?\s+(?!to\b)[a-z]+/i,no:/\b(made|make|makes)\s+(me|you|him|her|us|them)\s+to\b/i,h:'Someone forced someone: make + person + base verb (no to).',o:['The teacher forced the class to repeat the lesson.','Your dad forced you to wash the dishes.']},
+ permit:{re:/\b(let|lets)\s+[a-z]+(\s+[a-z]+)?\s+(?!to\b)[a-z]+/i,no:/\blets?\s+(me|you|him|her|us|them)\s+to\b/i,h:'Someone gave permission: let + person + base verb (no to).',o:['Your parents allowed you to go to the concert.','The teacher allowed the class to use phones.']},
+ react:{re:/\b(made|makes)\s+[a-z]+\s+(cry|laugh|smile|scream|jump|cheer)\b/i,h:'Something caused a reaction: made + person + base verb.',o:['A sad song caused you to cry.','The comedian caused everyone to laugh.']}
+};
+let cur=null,got=false;
+function nextOM(){const k=Object.keys(OM),kk=k[Math.floor(Math.random()*k.length)],a=OM[kk].o;
+  cur=kk;got=false;$('omq').textContent=a[Math.floor(Math.random()*a.length)];$('omi').value='';$('omf').textContent='';$('oms').textContent='';}
+$('omn').onclick=nextOM;
+$('omc').onclick=()=>{const o=OM[cur],v=nz($('omi').value);
+  if(o.re.test(v)&&!(o.no&&o.no.test(v))){$('omf').textContent='✔ Well chosen for the occasion.';if(!got){got=true;add();}}
+  else{$('omf').textContent='Not yet.';$('oms').textContent='Hint: '+o.h;}};
+nextOM();
+
+</script>
+</body></html>
