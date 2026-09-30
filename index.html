@@ -66,6 +66,31 @@ textarea,select{width:100%;font:inherit;background:#0009;color:var(--ivory);bord
 .think .q{font-size:1.1rem;font-weight:800;margin:4px 0}
 .think .ins{margin-top:10px;padding:10px 12px;border-left:4px solid var(--gold);background:#0007;border-radius:8px}
 .think small{color:#f0bd4aaa}
+/* Scene video with synced captions (red-carpet look) */
+.scene{clear:both;margin:18px 0}
+.scene-title{font-family:'Abril Fatface',Georgia,serif;color:var(--gold);font-size:clamp(1.1rem,3.5vw,1.4rem);margin:0 2px 8px;letter-spacing:.03em}
+.scene-frame{position:relative;max-width:100%;border:2px solid var(--gold);border-radius:18px;overflow:hidden;background:#000;box-shadow:0 0 24px #f0bd4a40,0 12px 30px #0009;aspect-ratio:16/9}
+.scene-frame video{display:block;width:100%;height:100%;object-fit:cover}
+.scene-cap{position:absolute;z-index:1;left:0;right:0;bottom:0;display:grid;padding:38px 14px calc(12px + env(safe-area-inset-bottom,0px));background:linear-gradient(to top,#1a0510f2 0%,#4a0d27b0 55%,transparent 100%);text-align:center}
+.scene-cap-in{grid-area:1/1;opacity:0;transform:translateY(10px);transition:opacity .3s ease,transform .3s ease}
+.scene-cap-in.on{opacity:1;transform:none}
+.scene-line{margin:0;font-size:clamp(1.2rem,4vw,2rem);font-weight:800;color:var(--ivory);text-shadow:0 2px 8px #000}
+.scene-line em,.scene-sub em{color:var(--gold);font-style:italic;font-weight:800}
+.scene-sub{margin:5px 0 0;font-size:clamp(.85rem,2.6vw,1.05rem);font-weight:700;color:var(--gold2);text-shadow:0 2px 6px #000}
+.scene .pp{border-bottom:3px solid var(--gold);padding-bottom:1px}
+.scene .bv{border-bottom:3px dashed var(--gold2);padding-bottom:1px}
+.scene-lbl{display:inline-block;font:800 .58rem Nunito,sans-serif;letter-spacing:.08em;text-transform:uppercase;color:#2a0715;background:var(--gold2);border-radius:99px;padding:1px 7px;margin:0 3px;vertical-align:middle}
+.scene-tag{display:inline-block;justify-self:center;margin-top:8px;font:800 .68rem Nunito,sans-serif;letter-spacing:.18em;text-transform:uppercase;color:var(--gold2);border:1.5px solid var(--gold);border-radius:99px;padding:3px 12px;background:#1a0510cc}
+.scene-btn{position:absolute;z-index:2;top:10px;right:10px;width:44px;height:44px;border-radius:50%;border:2px solid var(--gold);background:#1a0510d9;color:var(--gold);display:flex;align-items:center;justify-content:center;cursor:pointer;font:inherit;padding:0}
+.scene-btn:hover{background:#f0bd4a33}
+.scene-btn:focus-visible{outline:3px solid var(--gold2);outline-offset:2px}
+.scene-btn svg{width:18px;height:18px;fill:currentColor}
+.scene-fallback{border:2px solid var(--gold);border-radius:18px;background:linear-gradient(160deg,#3a0a20,#250615);padding:18px;text-align:center;box-shadow:0 0 22px #f0bd4a33}
+.scene-fallback img{max-width:100%;border-radius:12px;border:1px solid #f0bd4a66;margin-bottom:10px}
+.scene-static{text-align:left;background:#0006;border-left:4px solid var(--gold);border-radius:12px;padding:10px 14px;margin:8px 0}
+.scene-static .scene-line{font-size:clamp(1.05rem,3.4vw,1.4rem)}
+.scene-static .scene-tag{margin-top:6px}
+@media(prefers-reduced-motion:reduce){.scene-cap-in{transition:none}}
 .nu{clear:both;margin:16px 0;padding:14px 16px;border-radius:16px;border:1px solid #b58cff88;border-left:6px solid #b58cff;background:#1f0d3a}
 .nu h4{margin:0 0 6px;font:800 .85rem Nunito,sans-serif;letter-spacing:.06em;color:#d9c4ff}
 .nu ul{margin:6px 0;padding-left:20px}.nu li{margin:4px 0}
@@ -421,6 +446,76 @@ Object.entries(H).forEach(([k,d])=>{
     o.appendChild(b);});
   sec.querySelector('h2').after(bx);
 });
+
+// ===== Scene clips: video with time-synced captions =====
+// HOW TO SWAP OR ADD A CLIP: each scene is one entry in SCENE_CLIPS below.
+// 1) Drop scene-N.mp4 (and its poster scene-N-poster.jpg) into the videos/ folder.
+// 2) Copy the entry and change: sec (target section id: 'l1'...'l6'), src, poster,
+//    title, and the phases. `until` values are FRACTIONS of the clip (0 to 1),
+//    so any clip length works: phase 1 shows from 0 to `until`, phase 2 from
+//    `until` to the end. Captions restart automatically on every loop.
+// The block is inserted right after the section's .think card (fallback: its h2).
+(function(){
+  const SCENE_CLIPS=[
+    {sec:'l1',src:'videos/scene-1.mp4',poster:'videos/scene-1-poster.jpg',
+     title:'🎬 Watch it happen',
+     label:'Scene: a young woman washes her car alone, then relaxes while workers wash it',
+     phases:[
+      {until:.45,
+       line:'She <em>washes</em> her car.',
+       sub:'',
+       tag:'SHE DOES IT'},
+      {until:1,
+       line:'She <em>has</em> her car <em class="pp">washed</em><i class="scene-lbl">thing → participle</i>',
+       sub:'or: She <em>has</em> the workers <em class="bv">wash</em><i class="scene-lbl">person → base verb</i> her car.',
+       tag:'SOMEONE ELSE DOES IT'}
+     ]}
+    // ,{sec:'l2',src:'videos/scene-2.mp4',poster:'videos/scene-2-poster.jpg',title:'🎬 Watch it happen',label:'…',phases:[…]}
+  ];
+  const REDUCED=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const PLAY='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>';
+  const PAUSE='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 5h4v14H6zM14 5h4v14h-4z"/></svg>';
+  SCENE_CLIPS.forEach(cfg=>{
+    const sec=document.getElementById(cfg.sec);if(!sec)return;
+    const anchor=sec.querySelector('.think')||sec.querySelector('h2');if(!anchor)return;
+    const fig=document.createElement('figure');fig.className='scene';
+    fig.innerHTML='<figcaption class="scene-title">'+cfg.title+'</figcaption>'+
+      '<div class="scene-frame">'+
+        '<video class="scene-video" muted playsinline loop preload="metadata" poster="'+cfg.poster+'" aria-label="'+cfg.label+'">'+
+          '<source src="'+cfg.src+'" type="video/mp4">'+
+        '</video>'+
+        '<div class="scene-cap" aria-live="polite"><div class="scene-cap-in on"></div><div class="scene-cap-in"></div></div>'+
+        '<button class="scene-btn" type="button" aria-label="Play video">'+PLAY+'</button>'+
+      '</div>'+
+      '<div class="scene-fallback" hidden>'+
+        '<img src="'+cfg.poster+'" alt="" onerror="this.remove()">'+
+        cfg.phases.map(p=>'<div class="scene-static"><p class="scene-line">'+p.line+'</p>'+(p.sub?'<p class="scene-sub">'+p.sub+'</p>':'')+'<span class="scene-tag">'+p.tag+'</span></div>').join('')+
+      '</div>';
+    anchor.after(fig);
+    const frame=fig.querySelector('.scene-frame'),v=fig.querySelector('video'),src=fig.querySelector('source'),
+          capA=fig.querySelectorAll('.scene-cap-in')[0],capB=fig.querySelectorAll('.scene-cap-in')[1],
+          btn=fig.querySelector('.scene-btn'),fb=fig.querySelector('.scene-fallback');
+    v.muted=true;
+    let cur=0,act=0;const layers=[capA,capB];
+    const render=(el,i)=>{const p=cfg.phases[i];el.innerHTML='<p class="scene-line">'+p.line+'</p>'+(p.sub?'<p class="scene-sub">'+p.sub+'</p>':'')+'<span class="scene-tag">'+p.tag+'</span>';};
+    const idx=()=>{const d=v.duration;if(!(d>0))return 0;const f=v.currentTime/d;for(let i=0;i<cfg.phases.length;i++)if(f<cfg.phases[i].until)return i;return cfg.phases.length-1;};
+    const sync=()=>{const i=idx();if(i===cur)return;cur=i;const nx=1-act;
+      render(layers[nx],i);layers[nx].classList.add('on');layers[act].classList.remove('on');act=nx;};
+    render(capA,0);
+    v.addEventListener('timeupdate',sync);
+    v.addEventListener('seeked',sync);
+    v.addEventListener('loadedmetadata',()=>{if(v.videoWidth&&v.videoHeight)frame.style.aspectRatio=v.videoWidth+' / '+v.videoHeight;sync();});
+    const paint=()=>{const on=!v.paused&&!v.ended;btn.innerHTML=on?PAUSE:PLAY;btn.setAttribute('aria-label',on?'Pause video':'Play video');};
+    v.addEventListener('play',paint);v.addEventListener('pause',paint);
+    btn.onclick=()=>{if(v.paused||v.ended)v.play().catch(()=>{});else v.pause();};
+    const fail=()=>{frame.hidden=true;fb.hidden=false;};
+    v.addEventListener('error',fail);if(src)src.addEventListener('error',fail);
+    if(!REDUCED&&'IntersectionObserver' in window){
+      const io=new IntersectionObserver(es=>{es.forEach(e=>{if(e.intersectionRatio>=.6)v.play().catch(()=>{});else v.pause();});},{threshold:[0,.6,1]});
+      io.observe(frame);
+    }
+  });
+})();
 
 // Nuances
 const N={
