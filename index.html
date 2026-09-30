@@ -186,8 +186,12 @@ textarea{min-height:120px}
 /* CSS-timed caption sequence (fallback when timeupdate never fires) */
 .scene-box.css-sync .scene-cap{animation:capFade 10.05s linear infinite}
 .scene-box.css-sync .scene-cap[data-phase="1"]{animation-name:capFade2}
+#scene2 .scene-box.css-sync .scene-cap{animation-name:capFadeB}
+#scene2 .scene-box.css-sync .scene-cap[data-phase="1"]{animation-name:capFadeB2}
 @keyframes capFade{0%,44%{opacity:1;visibility:visible}46%,98%{opacity:0;visibility:hidden}100%{opacity:1;visibility:visible}}
 @keyframes capFade2{0%,44%{opacity:0;visibility:hidden}46%,98%{opacity:1;visibility:visible}100%{opacity:0;visibility:hidden}}
+@keyframes capFadeB{0%,53%{opacity:1;visibility:visible}55%,98%{opacity:0;visibility:hidden}100%{opacity:1;visibility:visible}}
+@keyframes capFadeB2{0%,53%{opacity:0;visibility:hidden}55%,98%{opacity:1;visibility:visible}100%{opacity:0;visibility:hidden}}
 /* ============ ORIENTATION (explicit portrait / landscape layouts) ============ */
 @media (orientation:portrait){
   .hero{padding:52px 18px 34px}
@@ -383,6 +387,34 @@ html.lite .scene-box,html.lite .think{box-shadow:none}
 <div class="ins" hidden>The verb shows <b class="k">how much power</b> the boss uses: let (permission) &lt; have (normal request) &lt; make (pressure).<p class="es" lang="es">El verbo revela cuánta presión usa el jefe.</p></div>
 <small>Tip: vote by show of hands before tapping.</small>
 </div>
+
+<!-- Scene 2: video + HTML-synced captions (static: readable with JS off) -->
+<figure class="scene" id="scene2" data-phase-switch="0.54" data-duration="10.05">
+<figcaption class="scene-title">🎬 Watch who really cuts the hair</figcaption>
+<div class="scene-box">
+<video class="scene-vid" muted playsinline preload="none" poster="videos/scene-2-poster.jpg" width="1280" height="720" aria-label="Scene: a girl cuts her own hair in the bathroom, then a stylist cuts her hair in a salon">
+<source data-src="videos/scene-2.mp4" type="video/mp4">
+<source data-src="videos/scene-2.webm" type="video/webm">
+</video>
+<button class="scene-btn" type="button" aria-label="Play video"><svg class="i-play" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg><svg class="i-pause" viewBox="0 0 24 24" aria-hidden="true" hidden><path d="M6 5h4v14H6zM14 5h4v14h-4z"/></svg></button>
+</div>
+<div class="scene-caps" aria-live="polite">
+<div class="scene-cap is-on" data-phase="0">
+<p class="scene-line">She <em>cuts</em> her hair.</p>
+<span class="scene-tag">SHE DOES IT</span>
+</div>
+<div class="scene-cap" data-phase="1">
+<p class="scene-line">She <em>has</em> her hair <em>cut</em><span class="scene-lbl">thing → participle</span></p>
+<p class="scene-sub">or: She <em>has</em> the stylist <em>cut</em><span class="scene-lbl">person → base verb</span> her hair.</p>
+<span class="scene-tag">SOMEONE ELSE DOES IT</span>
+</div>
+</div>
+<div class="scene-transcript">
+<img class="scene-fb-img" src="videos/scene-2-poster.jpg" alt="Poster frame: a stylist cutting a girl's hair in a salon" width="960" height="540" loading="lazy">
+<p><b>She <em>cuts</em> her hair.</b> — SHE DOES IT</p>
+<p><b>She <em>has</em> her hair <em>cut</em>.</b> (thing → participle)<br>or: <b>She <em>has</em> the stylist <em>cut</em> her hair.</b> (person → base verb) — SOMEONE ELSE DOES IT</p>
+</div>
+</figure>
 
 <div class="tri" data-tri>
 <div class="tc"><h4>💡 EXPLAIN</h4><p>The subject doesn't do the action: the subject <b class="k">causes</b> it. That's the whole idea. The rest is choosing <i>how much power</i> you use.</p><p class="es" lang="es">En español: "Me corté el pelo" es ambiguo. En inglés debes elegir: <i>cut</i> (yo) o <i>had cut</i> (otro).</p></div>
@@ -1517,8 +1549,8 @@ function initTwist(){
 }
 
 /* ---------- scene video (tap to play, no autoplay) ---------- */
-function initScene(){
-  var fig=$('scene1');if(!fig)return;
+function sceneOne(fig){
+  if(!fig)return;
   var box=qs('.scene-box',fig),v=qs('video',fig),btn=qs('.scene-btn',fig);
   if(!box||!v||!btn)return;
   var caps=qsa('.scene-cap',fig);
@@ -1594,6 +1626,7 @@ function initScene(){
     }else{v.pause();}
   };
 }
+function initScene(){each(qsa('.scene'),sceneOne);}
 
 /* ---------- orientation change (smooth, no thrash) ---------- */
 function initRotation(){
